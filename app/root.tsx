@@ -29,6 +29,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Portfólio de Seu Nome, especialista em [sua área, ex.: design gráfico, desenvolvimento web]. Veja meus projetos criativos e entre em contato!"/>
+
+        <meta name="keywords" content="portfólio, [sua área], projetos, [seu nome], [palavras-chave relacionadas]"/>
+        <meta name="robots" content="index, follow"/>
+
+        <meta property="og:title" content="Seu Nome - Portfólio de Projetos Criativos"/>
+        <meta property="og:description" content="Explore o portfólio de [Seu Nome], com projetos incríveis em [sua área]."/>
+        <meta property="og:image" content="https://seusite.com/images/og-image.jpg"/>
+        <meta property="og:url" content="https://seusite.com"/>
+        <meta property="og:type" content="website"/>
+
+      
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:title" content="Seu Nome - Portfólio de Projetos Criativos"/>
+        <meta name="twitter:description" content="Explore o portfólio de [Seu Nome], com projetos incríveis em [sua área]."/>
+        <meta name="twitter:image" content="https://seusite.com/images/og-image.jpg"/>
+        
+        <link rel="icon" type="image/png" href="https://i.pinimg.com/1200x/eb/4f/20/eb4f207b244725523ac2fb53e429b586.jpg"/>
+
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+      
+        <link rel="canonical" href="https://seusite.com"/>
+
         <Meta />
         <Links />
       </head>
