@@ -1,13 +1,19 @@
-
 import { useState, useEffect } from "react"
-import { ChevronDown, Github, Linkedin, Mail, ExternalLink, Menu, X } from "lucide-react"
+import { ChevronDown, Github, Linkedin, Mail, ExternalLink, Menu, X, Clock, Briefcase } from "lucide-react"
 import { motion, AnimatePresence, easeInOut } from "framer-motion"
-import { projects } from "../data/projects"
+
 import { skills } from "../data/skills"
-import profileImage from "../../../public/assets/profile-y.jpg"
+import { projects } from "../data/projects"
+import { experiences } from "../data/expirences"
+
+import { sendEmail } from "../utils/malito"
+
+import profileImage from '../../../public/assets/profile-y.jpg'
+
 const Portfolio = () => {
     const [activeSection, setActiveSection] = useState("home")
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isExperienceOpen, setIsExperienceOpen] = useState(false)
 
     // State for initial hero section animation
     const [heroVisible, setHeroVisible] = useState(false)
@@ -21,42 +27,235 @@ const Portfolio = () => {
         element.scrollIntoView({ behavior: "smooth" })
         setActiveSection(sectionId)
         setIsMenuOpen(false)
+        setIsExperienceOpen(false) // Close experience sidebar if open
         }
     }
-    
+
+    const handleContact = () => {
+        sendEmail({
+            to: 'kawaklebersc@gmail.com',
+            subject: 'Proposta de Serviço',
+            body: 'Olá, gostaria de entrar em contato para averiguar os seus serviços e solicitar um orcamento.',
+        });
+    };
 
     const currentYear = new Date().getFullYear()
 
 
-    const sectionVariants = {
-        hidden: { opacity: 0, y: 40 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-            duration: 0.8,
-            ease: easeInOut, // Use the Easing.easeInOut constant instead of a string
+        const sectionVariants = {
+            hidden: { opacity: 0, y: 40 },
+            visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                duration: 0.8,
+                ease: easeInOut, // Use the Easing.easeInOut constant instead of a string
+                },
             },
-        },
-    };
+        };
 
-    const itemVariants = {
-        hidden: {
-            opacity: 0,
-            y: 20,
-        },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-            duration: 0.5,
-            ease: easeInOut, // Update this to a valid easing function
+        const itemVariants = {
+            hidden: {
+                opacity: 0,
+                y: 20,
             },
-        },
-    };
-
+            visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                duration: 0.5,
+                ease: easeInOut, // Update this to a valid easing function
+                },
+            },
+        };
     return (
         <div className="min-h-screen bg-white text-black overflow-x-hidden font-sans">
+        {/* Overlay para fechar sidebars */}
+        <AnimatePresence>
+            {(isMenuOpen || isExperienceOpen) && (
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 bg-black/50 z-40"
+                onClick={() => {
+                setIsMenuOpen(false)
+                setIsExperienceOpen(false)
+                }}
+            />
+            )}
+        </AnimatePresence>
+
+        {/* Navigation Sidebar */}
+        <AnimatePresence>
+            {isMenuOpen && (
+            <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="fixed top-0 right-0 h-full w-80 bg-white border-l border-black z-50 shadow-lg"
+            >
+                <div className="p-6 border-b border-neutral-200">
+                <div className="flex justify-between items-center">
+                    <h2 className="text-2xl font-bold tracking-tight">Navegação</h2>
+                    <button
+                    onClick={() => setIsMenuOpen(false)}
+                    className="p-2 text-black hover:bg-neutral-100 transition-colors duration-200 rounded-full"
+                    aria-label="Close navigation menu"
+                    >
+                    <X size={24} />
+                    </button>
+                </div>
+                </div>
+
+                <div className="p-6">
+                <div className="space-y-4">
+                    {["home", "about", "skills", "projects", "contact"].map((item, index) => (
+                    <motion.button
+                        key={item}
+                        onClick={() => scrollToSection(item)}
+                        className={`group w-full text-left p-4 border transition-all duration-300 transform hover:scale-[1.02] ${
+                        activeSection === item
+                            ? "border-black bg-black text-white"
+                            : "border-neutral-200 hover:border-black hover:bg-neutral-50"
+                        }`}
+                        initial={{ x: 20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: index * 0.05 + 0.1 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                    >
+                        <div className="flex items-center justify-between">
+                        <span className="text-lg font-medium capitalize">{item}</span>
+                        <div
+                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            activeSection === item ? "bg-white" : "bg-neutral-400 group-hover:bg-black"
+                            }`}
+                        />
+                        </div>
+                        <div className="text-sm opacity-70 mt-1">
+                        {item === "home" && "Início do portfolio"}
+                        {item === "about" && "Sobre minha trajetória"}
+                        {item === "skills" && "Tecnologias e habilidades"}
+                        {item === "projects" && "Meus trabalhos"}
+                        {item === "contact" && "Entre em contato"}
+                        </div>
+                    </motion.button>
+                    ))}
+                </div>
+
+                <div className="mt-8 pt-8 border-t border-neutral-200">
+                    <h3 className="font-bold mb-4 text-neutral-700">Links Rápidos</h3>
+                    <div className="space-y-3">
+                    <a
+                        href="#"
+                        className="flex items-center gap-3 p-2 text-black hover:bg-neutral-100 transition-colors duration-200 rounded"
+                    >
+                        <Github size={18} />
+                        <span>GitHub</span>
+                    </a>
+                    <a
+                        href="#"
+                        className="flex items-center gap-3 p-2 text-black hover:bg-neutral-100 transition-colors duration-200 rounded"
+                    >
+                        <Linkedin size={18} />
+                        <span>LinkedIn</span>
+                    </a>
+                    <button
+                        onClick={handleContact}
+                        className="flex items-center gap-3 p-2 text-black hover:bg-neutral-100 transition-colors duration-200 rounded"
+                    >
+                        <Mail size={18} />
+                        <span>Email</span>
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </motion.div>
+            )}
+        </AnimatePresence>
+
+        {/* Experience Timeline Sidebar */}
+        <AnimatePresence>
+            {isExperienceOpen && (
+            <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100%" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="fixed top-0 left-0 h-full w-96 bg-white border-r border-black z-50 shadow-lg"
+            >
+                <div className="p-6 border-b border-neutral-200">
+                <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                    <Briefcase size={24} />
+                    <h2 className="text-2xl font-bold tracking-tight">Experiência</h2>
+                    </div>
+                    <button
+                    onClick={() => setIsExperienceOpen(false)}
+                    className="p-2 text-black hover:bg-neutral-100 transition-colors duration-200 rounded-full"
+                    aria-label="Close experience timeline"
+                    >
+                    <X size={24} />
+                    </button>
+                </div>
+                </div>
+
+                <div className="p-6 h-full overflow-y-auto">
+                <div className="space-y-8">
+                    {experiences.map((exp, index) => (
+                    <motion.div
+                        key={index}
+                        className="relative"
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: index * 0.1 + 0.1 }}
+                    >
+                        {/* Timeline line */}
+                        {index !== experiences.length - 1 && (
+                        <div className="absolute left-6 top-12 w-px h-[calc(100%_-_2rem)] bg-neutral-200" />
+                        )}
+
+                        <div className="flex gap-4">
+                        <div className="flex-shrink-0">
+                            <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-bold text-lg">
+                            {index + 1}
+                            </div>
+                        </div>
+
+                        <div className="flex-1 bg-neutral-50 p-4 border-l border-black hover:bg-neutral-100 transition-colors duration-300">
+                            <div className="flex items-center gap-2 mb-2">
+                            <Clock size={16} className="text-neutral-600" />
+                            <span className="text-sm font-medium text-neutral-600">{exp.year}</span>
+                            </div>
+
+                            <h3 className="text-lg font-bold mb-1">{exp.position}</h3>
+                            <h4 className="text-md font-medium text-neutral-700 mb-3">{exp.company}</h4>
+
+                            <p className="text-sm text-neutral-600 mb-4 leading-relaxed">{exp.description}</p>
+
+                            <div className="flex flex-wrap gap-2">
+                            {exp.skills.map((skill) => (
+                                <span
+                                key={skill}
+                                className="px-2 py-1 bg-white text-xs font-medium border border-neutral-300 text-neutral-800 hover:border-black transition-colors duration-200"
+                                >
+                                {skill}
+                                </span>
+                            ))}
+                            </div>
+                        </div>
+                        </div>
+                    </motion.div>
+                    ))}
+                </div>
+                </div>
+            </motion.div>
+            )}
+        </AnimatePresence>
+
         {/* Navigation */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-200">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -89,50 +288,50 @@ const Portfolio = () => {
                 ))}
                 </div>
 
-                {/* Mobile Menu Button */}
+                {/* Mobile Menu Buttons */}
+                <div className="md:hidden flex items-center gap-4">
                 <button
-                className="md:hidden p-2 text-black"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                    className="p-2 text-black hover:bg-neutral-100 transition-colors duration-200 rounded-full"
+                    onClick={() => setIsExperienceOpen(!isExperienceOpen)}
+                    title="Ver Experiência"
+                    aria-label="Toggle experience timeline"
                 >
-                <AnimatePresence mode="wait">
-                    <motion.div
-                    key={isMenuOpen ? "x" : "menu"}
-                    initial={{ rotate: 0, opacity: 0 }}
-                    animate={{ rotate: isMenuOpen ? 90 : 0, opacity: 1 }}
-                    exit={{ rotate: isMenuOpen ? 0 : 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    >
-                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </motion.div>
-                </AnimatePresence>
+                    <Briefcase size={24} />
                 </button>
-            </div>
-            </div>
-            {/* Mobile Menu */}
-            <AnimatePresence>
-            {isMenuOpen && (
-                <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="md:hidden overflow-hidden bg-white border-t border-neutral-200"
+                <button
+                    className="p-2 text-black hover:bg-neutral-100 transition-colors duration-200 rounded-full"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    title="Menu de Navegação"
+                    aria-label="Toggle navigation menu"
                 >
-                <div className="py-4 px-4 space-y-4">
-                    {["home", "about", "skills", "projects", "contact"].map((item) => (
-                    <button
-                        key={item}
-                        onClick={() => scrollToSection(item)}
-                        className="block w-full text-left capitalize py-2 text-lg text-black hover:text-neutral-600 transition-colors duration-300"
+                    <AnimatePresence mode="wait">
+                    <motion.div
+                        key={isMenuOpen ? "x" : "menu"}
+                        initial={{ rotate: 0, opacity: 0 }}
+                        animate={{ rotate: isMenuOpen ? 90 : 0, opacity: 1 }}
+                        exit={{ rotate: isMenuOpen ? 0 : 90, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
                     >
-                        {item}
-                    </button>
-                    ))}
+                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </motion.div>
+                    </AnimatePresence>
+                </button>
                 </div>
-                </motion.div>
-            )}
-            </AnimatePresence>
+            </div>
+            </div>
+            {/* Desktop Experience Button */}
+            <div className="hidden md:block">
+            <motion.button
+                onClick={() => setIsExperienceOpen(!isExperienceOpen)}
+                className="fixed left-6 top-1/2 transform -translate-y-1/2 z-30 bg-black text-white p-3 hover:bg-neutral-800 transition-all duration-300 hover:scale-110 group rounded-full"
+                title="Ver Cronologia de Experiência"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label="Toggle experience timeline"
+            >
+                <Briefcase size={24} className="group-hover:rotate-12 transition-transform duration-300" />
+            </motion.button>
+            </div>
         </nav>
 
         {/* Hero Section */}
@@ -208,20 +407,21 @@ const Portfolio = () => {
                     >
                     <Linkedin size={24} />
                     </motion.a>
-                    <motion.a
-                    href="kawaklebersc@gmail.com"
-                    className="p-3 border border-black text-black hover:bg-black hover:text-white transition-all duration-300 transform hover:scale-110"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    aria-label="Send email"
-                    >
-                    <Mail size={24} />
-                    </motion.a>
+                    <motion.button
+                        onClick={handleContact}
+                        className="p-3 border border-black text-black hover:bg-black hover:text-white transition-all duration-300 transform hover:scale-110"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        aria-label="Send email"
+                        >
+                        <Mail size={24} />
+                    </motion.button>
                 </div>
                 </div>
                 <div className="relative">
                 <div className="w-full h-96 bg-neutral-100 border border-black relative overflow-hidden flex items-center justify-center">
-                    <img src={profileImage} alt="Kawã Correia"  className=" bg-black bg-fixed grayscale-100 bg-cover bg-center object-fill" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 to-neutral-100"></div>
+                    <img src={profileImage} alt="Profile" className="w-full h-full object-cover grayscale-100" />
                 </div>
                 </div>
             </motion.div>
@@ -249,11 +449,7 @@ const Portfolio = () => {
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.5 }}
                     variants={itemVariants}
-                    transition={{
-                        delay: index * 0.1,
-                        duration: 0.5,
-                        ease: 'easeInOut',
-                    }}
+                    transition={{ delay: index * 0.1 }}
                 >
                     <div className="bg-white border border-black p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-neutral-600">
                     <h3 className="text-2xl font-bold mb-4 group-hover:text-neutral-700 transition-colors duration-300">
@@ -302,13 +498,7 @@ const Portfolio = () => {
                     <div className="bg-white border border-black overflow-hidden h-full transition-all duration-300 hover:shadow-lg hover:border-neutral-600">
                     <div className="h-48 bg-neutral-100 relative overflow-hidden flex items-center justify-center">
                         <div className="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-all duration-300"></div>
-                        <img
-                            src={project.imageUrl}
-                            alt={project.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 grayscale-100"
-                        />
-                        <div className="relative text-4xl font-bold text-neutral-300 group-hover:scale-110 transition-transform duration-300">
-                        </div>
+                        <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover grayscale-50" />
                     </div>
                     <div className="p-6">
                         <h3 className="text-2xl font-bold mb-3 group-hover:text-neutral-700 transition-colors duration-300">
@@ -362,20 +552,20 @@ const Portfolio = () => {
                 Estou sempre aberto a novos desafios e oportunidades. Entre em contato para discutirmos seu próximo projeto.
             </motion.p>
             <div className="flex justify-center gap-6 flex-wrap">
-                <motion.a
-                href="kawaklebersc@gmail.com"
-                className="group flex items-center gap-3 bg-white text-black px-8 py-4 text-lg hover:bg-neutral-100 transition-all duration-300 transform hover:scale-105 border border-white"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                <motion.button
+                    onClick={handleContact}
+                    className="group flex items-center gap-3 bg-white text-black px-8 py-4 text-lg hover:bg-neutral-100 transition-all duration-300 transform hover:scale-105 border border-white"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                 >
                 <Mail className="group-hover:rotate-12 transition-transform duration-300" size={20} />
                 Enviar Email
-                </motion.a>
+                </motion.button>
                 <motion.a
-                href="https://github.com/Izileth"
-                className="group flex items-center gap-3 border border-white text-white px-8 py-4 text-lg hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                    href="https://github.com/Izileth"
+                    className="group flex items-center gap-3 border border-white text-white px-8 py-4 text-lg hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                 >
                 <Github className="group-hover:rotate-12 transition-transform duration-300" size={20} />
                 GitHub
@@ -387,7 +577,7 @@ const Portfolio = () => {
         {/* Footer */}
         <footer className="py-8 bg-black text-white border-t border-neutral-800">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-            <p className="text-neutral-400 text-sm">© {currentYear} Seu Nome. Desenvolvido com React & Tailwind CSS.</p>
+            <p className="text-neutral-400 text-sm">© {currentYear} Kawã Correia. Desenvolvido com React & Tailwind CSS.</p>
             </div>
         </footer>
         </div>
