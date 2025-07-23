@@ -38,7 +38,7 @@ const Portfolio = () => {
         sendEmail({
             to: 'kawaklebersc@gmail.com',
             subject: 'Proposta de Serviço',
-            body: 'Olá, gostaria de entrar em contato para averiguar os seus serviços e solicitar um orcamento.',
+            body: 'Olá, gostaria de entrar em contato para averiguar os seus serviços e solicitar um orçamento.',
         });
     };
 
@@ -115,7 +115,7 @@ const Portfolio = () => {
 
                 <div className="p-6">
                 <div className="space-y-4">
-                    {["home", "about", "skills", "projects", "contact"].map((item, index) => (
+                    {["inicio", "sobre", "habilidades", "projetos", "contato"].map((item, index) => (
                     <motion.button
                         key={item}
                         onClick={() => scrollToSection(item)}
@@ -139,11 +139,11 @@ const Portfolio = () => {
                         />
                         </div>
                         <div className="text-sm opacity-70 mt-1">
-                        {item === "home" && "Início do portfolio"}
-                        {item === "about" && "Sobre minha trajetória"}
-                        {item === "skills" && "Tecnologias e habilidades"}
-                        {item === "projects" && "Meus trabalhos"}
-                        {item === "contact" && "Entre em contato"}
+                        {item === "inicio" && "Início do portfolio"}
+                        {item === "sobre" && "Sobre minha trajetória"}
+                        {item === "habilidades" && "Tecnologias e habilidades"}
+                        {item === "projetos" && "Meus trabalhos"}
+                        {item === "contato" && "Entre em contato"}
                         </div>
                     </motion.button>
                     ))}
@@ -274,7 +274,7 @@ const Portfolio = () => {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex space-x-8">
-                {["home", "about", "skills", "projects", "contact"].map((item, index) => (
+                {["inicio", "sobre", "habilidades", "projetos", "contato"].map((item, index) => (
                     <motion.button
                     key={item}
                     onClick={() => scrollToSection(item)}
@@ -338,7 +338,7 @@ const Portfolio = () => {
         </nav>
 
         {/* Hero Section */}
-        <section id="home" className="min-h-screen flex items-center justify-center pt-16 bg-white">
+        <section id="inicio" className="min-h-screen flex items-center justify-center pt-16 bg-white">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
             <motion.div
                 initial={{ y: 40, opacity: 0 }}
@@ -370,7 +370,7 @@ const Portfolio = () => {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-20 border-t border-neutral-200 bg-white">
+        <section id="sobre" className="py-20 border-t border-neutral-200 bg-white">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
                 className="grid md:grid-cols-2 gap-12 items-center"
@@ -433,7 +433,7 @@ const Portfolio = () => {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-20 border-t border-neutral-200 bg-neutral-50">
+        <section id="habilidades" className="py-20 border-t border-neutral-200 bg-neutral-50">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.h2
                 className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-tight"
@@ -477,7 +477,7 @@ const Portfolio = () => {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20 border-t border-neutral-200 bg-white">
+        <section id="projetos" className="py-20 border-t border-neutral-200 bg-white">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.h2
                 className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-tight"
@@ -502,7 +502,7 @@ const Portfolio = () => {
                     <div className="bg-white border border-black overflow-hidden h-full transition-all duration-300 hover:shadow-lg hover:border-neutral-600">
                     <div className="h-48 bg-neutral-100 relative overflow-hidden flex items-center justify-center">
                         <div className="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-all duration-300"></div>
-                        <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover grayscale-50" />
+                        <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover grayscale-100" />
                     </div>
                     <div className="p-6">
                         <h3 className="text-2xl font-bold mb-3 group-hover:text-neutral-700 transition-colors duration-300">
@@ -513,7 +513,7 @@ const Portfolio = () => {
                         {project.tech.map((tech) => (
                             <span
                             key={tech}
-                            className="px-3 py-1 bg-neutral-100 text-sm font-medium text-neutral-800 group-hover:bg-neutral-200 transition-colors duration-300"
+                            className="px-3 py-1 bg-zinc-100 text-sm font-medium text-neutral-800 group-hover:bg-neutral-200 transition-colors duration-300"
                             >
                             {tech}
                             </span>
@@ -534,7 +534,7 @@ const Portfolio = () => {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 border-t border-neutral-200 bg-black text-white">
+        <section id="contato" className="py-20 border-t border-neutral-200 bg-black text-white">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
             <motion.h2
                 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight"

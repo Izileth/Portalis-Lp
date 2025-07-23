@@ -5,27 +5,27 @@ import Project_3 from '../../../public/assets/project-y.png'
 
 export const projects = [
     {
-        title: "Eclipica Fashion Service",
+        title: "Eclipica - Luxuria & Poder ",
         description:
-        "Aplicação full-stack com React, Node.js e MongoDB. Interface moderna com animações suaves e design responsivo.",
+        "Aplicação full-stack com serviço de moda completo com animações suaves, design responsivo e conecttividade com mecanismo de pagamento",
         imageUrl: Project_1,
         tech: ["React", "Node.js", "TypeScript", "MongoDB", "Redux", "React Router"],
         stack: "Full-Stack",
         link: "https://ecliptica-eta.vercel.app/",
     },
     {
-        title: "Prestige Motor Company ",
+        title: "Prestige Motors - O Poder em Movimento ",
         description:
-        "Dashboard interativo para análise de dados com gráficos dinâmicos e filtros avançados.",
+        "Serviço full-stack com Dashboard interativo para análise de dados com gráficos dinâmicos e filtros avançado, além de uma API RESTful para controle de veículos e clientes.",
         imageUrl: Project_2,
         tech: ["React", "Node.js", "TypeScript", "MongoDB", "Zustand", "React Router" ],
         stack: "Full-Stack",
         link: "https://prestige-motors-eta.vercel.app/",
     },
     {
-        title: "Epicura Food Store",
+        title: "Epicura - Saborees Refinados",
         description:
-        "Aplicativo mobile de e-commerce com carrinho de compras, pagamentos e notificações push.",
+        "Aplicativo Web full-stack com Foco em experiência do usuário, design responsivo e conectividade com mecanismo de pagamento.",
         imageUrl: Project_3,
         tech: ["React", "Nest.js", "Typescript", "Stripe", "Redux", "Tanstack Query"],
         stack: "Full-Stack",
