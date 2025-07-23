@@ -6,6 +6,9 @@ import { skills } from "../data/skills"
 import { projects } from "../data/projects"
 import { experiences } from "../data/expirences"
 
+import DecryptText from "../components/decryptText"
+import GradientText from "../components/graidentText"
+
 import { sendEmail } from "../utils/malito"
 
 import profileImage from '../../../public/assets/profile-y.jpg'
@@ -342,12 +345,13 @@ const Portfolio = () => {
                 animate={heroVisible ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
             >
-                <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight tracking-tighter">Kawã Correia</h1>
+                <h1 className="text-6xl md:text-8xl font-bold mb-2 leading-tight tracking-tighter">Kawã Correia</h1>
+                <DecryptText  text="" speed={150} />
                 <motion.div
                 initial={{ scaleX: 0 }}
                 animate={heroVisible ? { scaleX: 1 } : {}}
                 transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
-                className="w-32 h-px bg-black mx-auto mb-8 origin-center"
+                className="w-32 h-px bg-black mx-auto mb-8 origin-center mt-6"
                 ></motion.div>
                 <p className="text-xl md:text-2xl text-neutral-700 mb-12 max-w-2xl mx-auto leading-relaxed">
                 Desenvolvedor Full Stack especializado em criar experiências digitais modernas e funcionais
