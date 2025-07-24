@@ -11,7 +11,7 @@ import GradientText from "../components/graidentText"
 
 import { sendEmail } from "../utils/malito"
 
-import profileImage from '../../../public/assets/profile-y.jpg'
+import profileImage from '../../../public/assets/profile-x.jpg'
 
 const Portfolio = () => {
     const [activeSection, setActiveSection] = useState("home")
@@ -329,7 +329,7 @@ const Portfolio = () => {
                 className="fixed left-6 top-1/2 transform -translate-y-1/2 z-30 bg-black text-white p-3 hover:bg-neutral-800 transition-all duration-300 hover:scale-110 group rounded-full"
                 title="Ver Cronologia de Experiência"
                 whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileTap={{ scale: 0.6 }}
                 aria-label="Toggle experience timeline"
             >
                 <Briefcase size={24} className="group-hover:rotate-12 transition-transform duration-300" />
@@ -357,7 +357,7 @@ const Portfolio = () => {
                 Desenvolvedor Full Stack especializado em criar experiências digitais modernas e funcionais
                 </p>
                 <motion.button
-                onClick={() => scrollToSection("projects")}
+                onClick={() => scrollToSection("projetos")}
                 className="group inline-flex items-center gap-2 bg-black text-white px-8 py-4 text-lg hover:bg-neutral-800 transition-all duration-300 transform hover:scale-105 border border-black"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
