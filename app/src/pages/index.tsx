@@ -153,14 +153,14 @@ const Portfolio = () => {
                     <h3 className="font-bold mb-4 text-neutral-700">Links Rápidos</h3>
                     <div className="space-y-3">
                     <a
-                        href="#"
+                        href="https://github.com/Izileth"
                         className="flex items-center gap-3 p-2 text-black hover:bg-neutral-100 transition-colors duration-200 rounded"
                     >
                         <Github size={18} />
                         <span>GitHub</span>
                     </a>
                     <a
-                        href="#"
+                        href="https://www.linkedin.com/in/kaw%C3%A3-correia-547547261/"
                         className="flex items-center gap-3 p-2 text-black hover:bg-neutral-100 transition-colors duration-200 rounded"
                     >
                         <Linkedin size={18} />
