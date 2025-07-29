@@ -7,7 +7,6 @@ import { projects } from "../data/projects"
 import { experiences } from "../data/expirences"
 
 import DecryptText from "../components/decryptText"
-import GradientText from "../components/graidentText"
 
 import { sendEmail } from "../utils/malito"
 
@@ -383,7 +382,7 @@ const Portfolio = () => {
                 <h2 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight">Sobre Mim</h2>
                 <div className="space-y-6 text-lg text-neutral-700 leading-relaxed">
                     <p>
-                    Desenvolvedor apaixonado por tecnologia com mais de X anos de experiência criando soluções digitais
+                    Desenvolvedor apaixonado por tecnologia com mais de 3 anos de experiência criando soluções digitais
                     inovadoras. Especializado em desenvolvimento full-stack com foco em performance e experiência do
                     usuário.
                     </p>
