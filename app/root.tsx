@@ -31,22 +31,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Portfólio de Seu Nome, especialista em [sua área, ex.: design gráfico, desenvolvimento web]. Veja meus projetos criativos e entre em contato!"/>
 
-        <meta name="keywords" content="portfólio, [sua área], projetos, [seu nome], [palavras-chave relacionadas]"/>
+        <meta name="keywords" content="portfólio, full-stack, projetos, ecommerce, blog, design, UI, UX"/>
         <meta name="robots" content="index, follow"/>
 
-        <meta property="og:title" content="Seu Nome - Portfólio de Projetos Criativos"/>
-        <meta property="og:description" content="Explore o portfólio de [Seu Nome], com projetos incríveis em [sua área]."/>
+        <meta property="og:title" content="Kawã Correia - Portfólio de Projetos Criativos"/>
+        <meta property="og:description" content="Explore o portfólio de Kawã Correua, com tecnologias full-stack e design gráfico impecáveis."/>
         <meta property="og:image" content="https://seusite.com/images/og-image.jpg"/>
         <meta property="og:url" content="https://seusite.com"/>
         <meta property="og:type" content="website"/>
 
       
         <meta name="twitter:card" content="summary_large_image"/>
-        <meta name="twitter:title" content="Seu Nome - Portfólio de Projetos Criativos"/>
-        <meta name="twitter:description" content="Explore o portfólio de [Seu Nome], com projetos incríveis em [sua área]."/>
+        <meta name="twitter:title" content="Kawã Correia - Portfólio Full Stack & Design Gráfico"/>
+        <meta name="twitter:description" content="Explore o portfólio de Kawã Correua, com tecnologias full-stack e design gráficos impecáveis."/>
         <meta name="twitter:image" content="https://seusite.com/images/og-image.jpg"/>
         
-        <link rel="icon" type="image/png" href="https://i.pinimg.com/1200x/eb/4f/20/eb4f207b244725523ac2fb53e429b586.jpg"/>
+        <link rel="icon" type="image/png" href="https://i.pinimg.com/1200x/cd/32/f7/cd32f7506c21256c9fb5aaeb1ae3fe37.jpg"/>
 
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
       
